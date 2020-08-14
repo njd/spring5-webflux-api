@@ -15,4 +15,13 @@ public class Vendor {
 
     private String firstName;
     private String lastName;
+
+    public Vendor() {
+    }
+
+    public Vendor(String id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
