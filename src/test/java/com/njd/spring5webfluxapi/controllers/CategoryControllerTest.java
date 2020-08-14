@@ -8,8 +8,7 @@ import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
-
-import static org.junit.jupiter.api.Assertions.*;
+import reactor.core.publisher.Mono;
 
 class CategoryControllerTest {
 
@@ -42,5 +41,12 @@ class CategoryControllerTest {
 
     @Test
     void getById() {
+        BDDMockito.given(categoryRepository.findById("1"))
+            .willReturn(Mono.just(Category.builder().description("Category 1").build()));
+
+        webTestClient.get()
+            .uri("/api/v1/categories/1")
+            .exchange()
+            .expectBody(Category.class);
     }
 }
